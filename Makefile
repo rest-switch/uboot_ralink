@@ -192,7 +192,7 @@ endif
 LIBS += lib_$(ARCH)/lib$(ARCH).a
 LIBS += net/libnet.a
 
-#LIBS += rtc/librtc.a
+LIBS += rtc/librtc.a
 LIBS += drivers/libdrivers.a
 
 ifeq ($(RALINK_USB),ON)

@@ -43,7 +43,7 @@ extern unsigned int  CFG_BLOCKSIZE;
 //#define ET_DEBUG
 #define CONFIG_RT2880_ETH		1	/* Enable built-in 10/100 Ethernet */
 
-#define CONFIG_MIPS32		1	/* MIPS 4Kc CPU core	*/
+#define CONFIG_MIPS32			1	/* MIPS 4Kc CPU core	*/
 //CONFIG_INCA_IP
 #if defined (RT3052_FPGA_BOARD) || defined (RT3352_FPGA_BOARD) || \
     defined (RT2883_FPGA_BOARD) || defined (RT3883_FPGA_BOARD) || \
@@ -90,21 +90,47 @@ extern unsigned int  CFG_BLOCKSIZE;
 
 #endif 
 
-#define SERIAL_CLOCK_DIVISOR 16
+#define SERIAL_CLOCK_DIVISOR	16
 
-#define CONFIG_BOOTDELAY	1	/* autoboot after 5 seconds	*/
+#define CONFIG_BOOTDELAY	1	/* autoboot after 1 second */
 
 #define CONFIG_BAUDRATE		57600
 
-#define CONFIG_SERVERIP 10.10.10.3
-#define CONFIG_IPADDR 10.10.10.123
-#define CONFIG_ETHADDR "00:AA:BB:CC:DD:10"
+#define CONFIG_SERVERIP		192.168.1.100
+#define CONFIG_IPADDR		192.168.1.8
+#define CONFIG_ETHADDR		"00:AA:BB:CC:DD:10"
+#define CONFIG_ENV_OVERWRITE	1
+
 /* valid baudrates */
 #define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
 
-//#define	CONFIG_TIMESTAMP		/* Print image info with timestamp */
+#define	CONFIG_TIMESTAMP	/* print image info with timestamp */
 
 #undef	CONFIG_BOOTARGS
+
+#define CONFIG_EXTRA_ENV_SETTINGS					\
+	"ramargs=setenv bootargs root=/dev/ram rw\0"			\
+	"addip=setenv bootargs $(bootargs) "				\
+	"ip=$(ipaddr):$(serverip):$(gatewayip):$(netmask)"		\
+	":$(hostname):$(netdev):off\0"					\
+	"addmisc=setenv bootargs $(bootargs) "				\
+		"console=ttyS0,$(baudrate) "				\
+		"ethaddr=$(ethaddr) "					\
+		"panic=1\0"						\
+	"flash_self=run ramargs addip addmisc;"				\
+		"bootm $(kernel_addr) $(ramdisk_addr)\0"		\
+	"kernel_addr=BFC40000\0"					\
+	"u-boot=u-boot.bin\0"						\
+	"load=tftp 8A100000 $(u-boot)\0"				\
+	"u_b=protect off 1:0-1;era 1:0-1;"				\
+		"cp.b 8A100000 BC400000 $(filesize)\0"			\
+	"loadfs=tftp 8A100000 root.cramfs\0"				\
+	"u_fs=era bc540000 bc83ffff;"					\
+		"cp.b 8A100000 BC540000 $(filesize)\0"			\
+	"test_tftp=tftp 8A100000 root.cramfs;run test_tftp\0"		\
+	"copyright=Copyright 2014-2016 The REST Switch Authors\0"	\
+	"website=www.rest-switch.com\0"					\
+	""
 
 #define CONFIG_BOOTCOMMAND	"tftp" //"run flash_self"
 
@@ -146,7 +172,7 @@ extern unsigned int  CFG_BLOCKSIZE;
 #define	CFG_MAXARGS		16		/* max number of command args*/
 
 #if defined (MTK_NAND)
-#define CFG_MALLOC_LEN      1*1024*1024
+#define CFG_MALLOC_LEN		1*1024*1024
 #else
 #define CFG_MALLOC_LEN		256*1024
 #endif
@@ -451,7 +477,7 @@ extern unsigned int  CFG_BLOCKSIZE;
 #define RT2880_REG_PIORESET     (RT2880_PRGIO_ADDR + 0x40)
 #endif
 #define RALINK_REG(x)		(*((volatile u32 *)(x)))	
-#if defined (RT6855A_FPGA_BOARD) || defined (RT6855A_ASIC_BOARD) || \
+#if defined (RT5350_ASIC_BOARD) || defined (RT6855A_FPGA_BOARD) || defined (RT6855A_ASIC_BOARD) || \
     defined (MT7621_FPGA_BOARD) || defined (MT7621_ASIC_BOARD) || defined (MT7628_FPGA_BOARD) || defined (MT7628_ASIC_BOARD)
 #define ra_inb(offset)		(*(volatile unsigned char *)(offset))
 #define ra_inw(offset)		(*(volatile unsigned short *)(offset))

@@ -301,7 +301,7 @@ static struct chip_info chips_data [] = {
 	{ "GD25Q32B",           0xC8, 0x40160000, 64 * 1024, 64,  0 },
 	{ "GD25Q64B",           0xC8, 0x40170000, 64 * 1024, 128, 0 },
 	{ "GD25Q128C",          0xC8, 0x40180000, 64 * 1024, 256, 0 },
-
+	{ "PM25LQ032C",         0x7f, 0x9D467F9D, 64 * 1024, 64,  0 },
 };
 
 #ifdef COMMAND_MODE
