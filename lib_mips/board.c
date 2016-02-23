@@ -2671,7 +2671,7 @@ int do_rw_rf(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	rf,     4,     1,      do_rw_rf,
-	"rf      - read/write rf register\n",
+	"rf        - read/write rf register\n",
 	"usage:\n"
 	"rf r <reg>        - read rf register\n"
 	"rf w <reg> <data> - write rf register (reg: decimal, data: hex)\n"

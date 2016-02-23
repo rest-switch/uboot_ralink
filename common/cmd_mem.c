@@ -881,19 +881,19 @@ int do_mem_crc (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 /**************************************************/
 U_BOOT_CMD(
 	md,     3,     1,      do_mem_md,
-	"md      - memory display\n",
+	"md        - memory display\n",
 	"[.b, .w, .l] address [# of objects]\n    - memory display\n"
 );
 
 U_BOOT_CMD(
 	mm,     2,      1,       do_mem_mm,
-	"mm      - memory modify (auto-incrementing)\n",
+	"mm        - memory modify (auto-incrementing)\n",
 	"[.b, .w, .l] address\n" "    - memory modify, auto increment address\n"
 );
 
 U_BOOT_CMD(
 	nm,     2,	    1,     	do_mem_nm,
-	"nm      - memory modify (constant address)\n",
+	"nm        - memory modify (constant address)\n",
 	"[.b, .w, .l] address\n    - memory modify, read and keep address\n"
 );
 
@@ -901,7 +901,7 @@ U_BOOT_CMD(
 #ifdef RT2880_U_BOOT_CMD_OPEN
 U_BOOT_CMD(
 	crc32,    4,    1,     do_mem_crc,
-	"crc32   - checksum calculation\n",
+	"crc32     - checksum calculation\n",
 	"address count [addr]\n    - compute CRC32 checksum [save at addr]\n"
 );
 #endif
@@ -909,7 +909,7 @@ U_BOOT_CMD(
 #if defined(RT2880_U_BOOT_CMD_OPEN) || defined(RALINK_USB) || defined(MTK_USB)
 U_BOOT_CMD(
 	crc32,    5,    1,     do_mem_crc,
-	"crc32   - checksum calculation\n",
+	"crc32     - checksum calculation\n",
 	"address count [addr]\n    - compute CRC32 checksum [save at addr]\n"
 	"-v address count crc\n    - verify crc of memory area\n"
 );
@@ -919,14 +919,14 @@ U_BOOT_CMD(
 #ifdef RT2880_U_BOOT_CMD_OPEN
 U_BOOT_CMD(
 	base,    2,    1,     do_mem_base,
-	"base    - print or set address offset\n",
+	"base      - print or set address offset\n",
 	"\n    - print address offset for memory commands\n"
 	"base off\n    - set address offset for memory commands to 'off'\n"
 );
 
 U_BOOT_CMD(
 	loop,    3,    1,    do_mem_loop,
-	"loop    - infinite loop on address range\n",
+	"loop      - infinite loop on address range\n",
 	"[.b, .w, .l] address number_of_objects\n"
 	"    - loop on a set of addresses\n"
 );
@@ -935,7 +935,7 @@ U_BOOT_CMD(
 #ifdef CONFIG_LOOPW
 U_BOOT_CMD(
 	loopw,    4,    1,    do_mem_loopw,
-	"loopw   - infinite write loop on address range\n",
+	"loopw     - infinite write loop on address range\n",
 	"[.b, .w, .l] address number_of_objects data_to_write\n"
 	"    - loop on a set of addresses\n"
 );
@@ -944,7 +944,7 @@ U_BOOT_CMD(
 #ifdef RT2880_U_BOOT_CMD_OPEN
 U_BOOT_CMD(
 	mtest,    4,    1,     do_mem_mtest,
-	"mtest   - simple RAM test\n",
+	"mtest     - simple RAM test\n",
 	"[start [end [pattern]]]\n"
 	"    - simple RAM read/write test\n"
 );
@@ -1225,7 +1225,7 @@ RT2880_START_WRITE_FLASH:
 
 U_BOOT_CMD(
 	cp,    4,    1,    do_mem_cp,
-	"cp      - memory copy\n",
+	"cp        - memory copy\n",
 	"[.b, .w, .l] source target count\n    - copy memory\n"
 );
 #endif

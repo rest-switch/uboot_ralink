@@ -612,7 +612,7 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 #ifdef RALINK_CMDLINE
 U_BOOT_CMD(
  	bootm,	CFG_MAXARGS,	1,	do_bootm,
- 	"bootm   - boot application image from memory\n",
+ 	"bootm     - boot application image from memory\n",
  	"[addr [arg ...]]\n    - boot application image stored in memory\n"
  	"\tpassing arguments 'arg ...'; when booting a Linux kernel,\n"
  	"\t'arg' can be the address of an initrd image\n"
@@ -1153,14 +1153,14 @@ int do_bootd (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
  	boot,	1,	1,	do_bootd,
- 	"boot    - boot default, i.e., run 'bootcmd'\n",
+ 	"boot      - boot default, i.e., run 'bootcmd'\n",
 	NULL
 );
 
 /* keep old command name "bootd" for backward compatibility */
 U_BOOT_CMD(
  	bootd, 1,	1,	do_bootd,
- 	"bootd   - boot default, i.e., run 'bootcmd'\n",
+ 	"bootd     - boot default, i.e., run 'bootcmd'\n",
 	NULL
 );
 
@@ -1233,7 +1233,7 @@ static int image_info (ulong addr)
 #ifdef RT2880_U_BOOT_CMD_OPEN
 U_BOOT_CMD(
 	iminfo,	CFG_MAXARGS,	1,	do_iminfo,
-	"iminfo  - print header information for application image\n",
+	"iminfo    - print header information for application image\n",
 	"addr [addr ...]\n"
 	"    - print header information for application image starting at\n"
 	"      address 'addr' in memory; this includes verification of the\n"
@@ -1297,7 +1297,7 @@ next_bank:	;
 
 U_BOOT_CMD(
 	imls,	1,		1,	do_imls,
-	"imls    - list all images found in flash\n",
+	"imls      - list all images found in flash\n",
 	"\n"
 	"    - Prints information about all images found at sector\n"
 	"      boundaries in flash.\n"

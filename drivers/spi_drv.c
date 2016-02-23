@@ -627,7 +627,7 @@ int rt2880_spi_toolkit(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	spicmd,	7,	1, 	rt2880_spi_toolkit,
-	"spicmd	- read/write data from/to eeprom or vtss\n",
+	"spicmd    - read/write data from/to eeprom or vtss\n",
 	"spicmd usage:\n"
 	"  spicmd eeprom read [address]\n"
 	"  spicmd eeprom write [size] [address] [value]\n"

@@ -496,7 +496,7 @@ int rt2880_i2c_toolkit(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	i2ccmd,	5,	1, 	rt2880_i2c_toolkit,
-	"i2ccmd	- read/write data to eeprom via I2C Interface\n",
+	"i2ccmd	   - read/write data to eeprom via I2C Interface\n",
 	"i2ccmd read/write eeprom_address data(if write)\n"
 	"i2ccmd format:\n"
 	"  i2ccmd set devaddr [addr in hex]\n"

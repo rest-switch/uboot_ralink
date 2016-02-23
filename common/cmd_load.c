@@ -1002,7 +1002,7 @@ START:
 #ifdef	CFG_LOADS_BAUD_CHANGE
 U_BOOT_CMD(
 	loads, 3, 0,	do_load_serial,
-	"loads   - load S-Record file over serial line\n",
+	"loads     - load S-Record file over serial line\n",
 	"[ off ] [ baud ]\n"
 	"    - load S-Record file over serial line"
 	" with offset 'off' and baudrate 'baud'\n"
@@ -1011,7 +1011,7 @@ U_BOOT_CMD(
 #else	/* ! CFG_LOADS_BAUD_CHANGE */
 U_BOOT_CMD(
 	loads, 2, 0,	do_load_serial,
-	"loads   - load S-Record file over serial line\n",
+	"loads     - load S-Record file over serial line\n",
 	"[ off ]\n"
 	"    - load S-Record file over serial line with offset 'off'\n"
 );
@@ -1026,7 +1026,7 @@ U_BOOT_CMD(
 #ifdef	CFG_LOADS_BAUD_CHANGE
 U_BOOT_CMD(
 	saves, 4, 0,	do_save_serial,
-	"saves   - save S-Record file over serial line\n",
+	"saves     - save S-Record file over serial line\n",
 	"[ off ] [size] [ baud ]\n"
 	"    - save S-Record file over serial line"
 	" with offset 'off', size 'size' and baudrate 'baud'\n"
@@ -1034,7 +1034,7 @@ U_BOOT_CMD(
 #else	/* ! CFG_LOADS_BAUD_CHANGE */
 U_BOOT_CMD(
 	saves, 3, 0,	do_save_serial,
-	"saves   - save S-Record file over serial line\n",
+	"saves     - save S-Record file over serial line\n",
 	"[ off ] [size]\n"
 	"    - save S-Record file over serial line with offset 'off' and size 'size'\n"
 );
@@ -1046,7 +1046,7 @@ U_BOOT_CMD(
 #if (CONFIG_COMMANDS & CFG_CMD_LOADB)
 U_BOOT_CMD(
 	loadb, 3, 0,	do_load_serial_bin,
-	"loadb   - load binary file over serial line (kermit mode)\n",
+	"loadb     - load binary file over serial line (kermit mode)\n",
 	"[ off ] [ baud ]\n"
 	"    - load binary file over serial line"
 	" with offset 'off' and baudrate 'baud'\n"
@@ -1078,7 +1078,7 @@ int do_hwflow (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	hwflow, 2, 0,	do_hwflow,
-	"hwflow  - turn the harwdare flow control on/off\n",
+	"hwflow    - turn the harwdare flow control on/off\n",
 	"[on|off]\n - change RTS/CTS hardware flow control over serial line\n"
 );
 

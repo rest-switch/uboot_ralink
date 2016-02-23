@@ -2067,7 +2067,7 @@ int ralink_nand_command(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	nand,	4,	1, 	ralink_nand_command,
-	"nand	- nand command\n",
+	"nand      - nand command\n",
 	"nand usage:\n"
 	"  nand id\n"
 	"  nand read <addr> <len>\n"

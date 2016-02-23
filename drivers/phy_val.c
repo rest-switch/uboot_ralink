@@ -423,7 +423,7 @@ int phy_chk(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	phyval, 2, 1, phy_chk,
-	"phyval  - ethernet phy value\n",
+	"phyval    - ethernet phy value\n",
 	"phyval usage:\n"
 	" phyval <port_no>"
 );

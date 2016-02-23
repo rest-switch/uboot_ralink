@@ -1956,7 +1956,7 @@ fail:
 
 U_BOOT_CMD(
 	msdc,	3,	1, 	ralink_msdc_command,
-	"msdc - msdc verified command\n",
+	"msdc      - msdc verified command\n",
 	"msdc usage:\n"
 //	"msdc switch - Switch MSDC\n"			/* MSDC Host Select */
 //	"msdc register - SDMMC Register Test\n"		/* SDMMC Register Test */

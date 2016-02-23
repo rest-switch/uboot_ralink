@@ -618,7 +618,7 @@ envmatch (uchar *s1, int i2)
 
 U_BOOT_CMD(
 	printenv, CFG_MAXARGS, 1,	do_printenv,
-	"printenv- print environment variables\n",
+	"printenv  - print environment variables\n",
 	"\n    - print values of all environment variables\n"
 	"printenv name ...\n"
 	"    - print value of environment variable 'name'\n"
@@ -626,7 +626,7 @@ U_BOOT_CMD(
 
 U_BOOT_CMD(
 	setenv, CFG_MAXARGS, 0,	do_setenv,
-	"setenv  - set environment variables\n",
+	"setenv    - set environment variables\n",
 	"name value ...\n"
 	"    - set environment variable 'name' to 'value ...'\n"
 	"setenv name\n"
@@ -638,7 +638,7 @@ U_BOOT_CMD(
       (CFG_CMD_ENV|CFG_CMD_FLASH))
 U_BOOT_CMD(
 	saveenv, 1, 0,	do_saveenv,
-	"saveenv - save environment variables to persistent storage\n",
+	"saveenv   - save environment variables to persistent storage\n",
 	NULL
 );
 
@@ -649,7 +649,7 @@ U_BOOT_CMD(
 
 U_BOOT_CMD(
 	askenv,	CFG_MAXARGS,	1,	do_askenv,
-	"askenv  - get environment variables from stdin\n",
+	"askenv    - get environment variables from stdin\n",
 	"name [message] [size]\n"
 	"    - get environment variable 'name' from stdin (max 'size' chars)\n"
 	"askenv name\n"
@@ -666,7 +666,7 @@ U_BOOT_CMD(
 int do_run (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]);
 U_BOOT_CMD(
 	run,	CFG_MAXARGS,	1,	do_run,
-	"run     - run commands in an environment variable\n",
+	"run       - run commands in an environment variable\n",
 	"var [...]\n"
 	"    - run the commands in the environment variable(s) 'var'\n"
 );

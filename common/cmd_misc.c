@@ -60,7 +60,7 @@ int do_irqinfo (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]);
 
 U_BOOT_CMD(
 	irqinfo,    1,    1,     do_irqinfo,
-	"irqinfo - print information about IRQs\n",
+	"irqinfo   - print information about IRQs\n",
 	NULL
 );
 #endif  /* CONFIG_COMMANDS & CFG_CMD_IRQ */
@@ -68,7 +68,7 @@ U_BOOT_CMD(
 
 U_BOOT_CMD(
 	sleep ,    2,    2,     do_sleep,
-	"sleep   - delay execution for some time\n",
+	"sleep     - delay execution for some time\n",
 	"N\n"
 	"    - delay execution for N seconds (N is _decimal_ !!!)\n"
 );

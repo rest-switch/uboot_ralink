@@ -128,7 +128,7 @@ int do_fat_fsload (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	fatload,	6,	0,	do_fat_fsload,
-	"fatload - load binary file from a dos filesystem\n",
+	"fatload   - load binary file from a dos filesystem\n",
 	"<interface> <dev[:part]>  <addr> <filename> [bytes]\n"
 	"    - load binary file 'filename' from 'dev' on 'interface'\n"
 	"      to address 'addr' from dos filesystem\n"
@@ -176,7 +176,7 @@ int do_fat_ls (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	fatls,	4,	1,	do_fat_ls,
-	"fatls   - list files in a directory (default /)\n",
+	"fatls     - list files in a directory (default /)\n",
 	"<interface> <dev[:part]> [directory]\n"
 	"    - list files from 'dev' on 'interface' in a 'directory'\n"
 );
@@ -214,7 +214,7 @@ int do_fat_fsinfo (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	fatinfo,	3,	1,	do_fat_fsinfo,
-	"fatinfo - print information about filesystem\n",
+	"fatinfo   - print information about filesystem\n",
 	"<interface> <dev[:part]>\n"
 	"    - print information about filesystem from 'dev' on 'interface'\n"
 );

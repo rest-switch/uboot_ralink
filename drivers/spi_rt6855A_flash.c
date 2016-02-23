@@ -1491,7 +1491,7 @@ int do_mem_cp(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	cp,	2,	1,	do_mem_cp,
-	"cp      - memory copy\n",
+	"cp        - memory copy\n",
 	"\ncp.uboot\n    - copy uboot block\n"
 	"cp.linux\n    - copy linux kernel block\n"
 );
@@ -1536,7 +1536,7 @@ int do_flerase (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	erase,	2,	1,	do_flerase,
-	"erase   - erase SPI FLASH memory\n",
+	"erase     - erase SPI FLASH memory\n",
 	"\nerase all\n    - erase all FLASH banks\n"
 	"erase uboot\n    - erase uboot block\n"
 	"erase linux\n    - erase linux kernel block\n"
@@ -1636,7 +1636,7 @@ int ralink_spi_command(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(
 	spi,	4,	1, 	ralink_spi_command,
-	"spi	- spi command\n",
+	"spi       - spi command\n",
 	"spi usage:\n"
 	"  spi id\n"
 	"  spi sr read\n"
