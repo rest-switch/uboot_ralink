@@ -13,6 +13,12 @@ prerequisites (redhat)
 sudo yum -y install gcc glibc.i686 zlib-devel ncurses-devel git
 ```
 
+prerequisites (ubuntu)
+```
+sudo apt-get update
+sudo apt-get -y install make gcc libc6-i386 zlib1g-dev libncurses5-dev git realpath
+```
+
 
 clone
 ```
