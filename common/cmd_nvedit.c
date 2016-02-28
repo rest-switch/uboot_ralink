@@ -147,6 +147,91 @@ int do_printenv (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 }
 #endif // RALINK_CMDLINE //
 
+/************************************************************************/
+int write_factory(int64_t imac1, const char* serial)
+{
+	const size_t mac1a_offs = 0x0004;
+	const size_t mac1b_offs = 0x0028;
+	const size_t mac2_offs = 0x002e;
+	const size_t serial_offs = 0x0400;
+	const size_t factory_addr = (CFG_FACTORY_ADDR - CFG_FLASH_BASE);
+	const size_t rw_size = 0x1000;
+
+	int8_t  update = 0;
+	uint8_t buf[rw_size];
+
+	// read flash
+	if(raspi_read(buf, factory_addr, rw_size) != rw_size) {
+		printf("failed to read factory flash memory\n");
+		return -1;
+	}
+
+	if(imac1 > 0) {
+		int i = 0;
+		uint8_t mac1[6] = { 0 };
+		uint8_t mac2[6] = { 0 };
+
+		for(i=0; i<6; ++i) {
+			mac1[5-i] = ((imac1 >> (8 * i)) & 0xff);
+		}
+
+		int64_t imac2 = imac1 + 1;
+		for(i=0; i<6; ++i) {
+			mac2[5-i] = ((imac2 >> (8 * i)) & 0xff);
+		}
+
+		// mac1a
+		size_t offs = (buf + mac1a_offs);
+		if(memcmp(offs, mac1, 6) != 0) {
+			update = 1;
+			memcpy(offs, mac1, 6);
+		}
+
+		// mac1b
+		offs = (buf + mac1b_offs);
+		if(memcmp(offs, mac1, 6) != 0) {
+			update = 1;
+			memcpy(offs, mac1, 6);
+		}
+
+		// mac2
+		offs = (buf + mac2_offs);
+		if(memcmp(offs, mac2, 6) != 0) {
+			update = 1;
+			memcpy(offs, mac2, 6);
+		}
+	}
+
+	// serial
+	if((serial != NULL) && (strlen(serial) == 9)) {
+		size_t offs = (buf + serial_offs);
+		if(memcmp(offs, serial, 9) != 0) {
+			update = 1;
+			memcpy(offs, serial, 9);
+		}
+	}
+
+	// anything to do?
+	if(update == 0) {
+		return 0;
+	}
+
+	puts("Erasing Factory Flash...\n");
+	if(raspi_erase(factory_addr, rw_size)) {
+		return 1;
+	}
+
+	puts("Writing to Factory Flash...\n");
+	int rc = raspi_write(buf, factory_addr, rw_size);
+	if(rc != rw_size) {
+		printf ("error %d!\n", rc);
+		return 1;
+	}
+	puts("done\n");
+
+	return 0;
+}
+
 /************************************************************************
  * Set a new environment variable,
  * or replace or delete an existing one.
@@ -161,7 +246,9 @@ int _do_setenv (int flag, int argc, char *argv[])
 	int   i, len, oldval;
 	int   console = -1;
 	uchar *env, *nxt = NULL;
-	uchar *name;
+	uchar *name, *val;
+	int64_t imac = 0;
+
 	bd_t *bd = gd->bd;
 
 	uchar *env_data = env_get_addr(0);
@@ -170,6 +257,51 @@ int _do_setenv (int flag, int argc, char *argv[])
 		return 1;
 
 	name = argv[1];
+
+	if((argc > 2) && (argv[2] != NULL)) {
+		if(strcmp(name, "ethaddr") == 0) {
+			val = argv[2];
+			len = strlen(val);
+
+			if(len < 17) {
+				printf("error: ethaddr must be in the form of aa:bb:cc:dd:ee:ff\n");
+				return 1;
+			}
+
+			for(i=0; *val != '\0'; ++i)
+			{
+				if(i > 5) {
+					printf("error parsing ethaddr: found more than 6 tokens\n");
+					return 1;
+				}
+				for( ; (*val < '0' || *val > '9') && (*val < 'a' || *val > 'f') && (*val < 'A' || *val > 'F') && (*val != '\0'); ++val );
+				imac |= ( ((int64_t)simple_strtol(val, &val, 16)) << (40 - i * 8) );
+			}
+			if(i != 6) {
+				printf("error parsing ethaddr: expected 6 tokens, only %d found\n", i);
+				return 1;
+			}
+			// normalize
+			sprintf(argv[2], "%02x:%02x:%02x:%02x:%02x:%02x\n", (uint8_t)(imac>>40), (uint8_t)(imac>>32), (uint8_t)(imac>>24), (uint8_t)(imac>>16), (uint8_t)(imac>>8), (uint8_t)imac);
+		}
+
+		if(strcmp(name, "serial#") == 0) {
+			val = argv[2];
+			len = strlen(val);
+
+			if(len != 9) {
+				printf ("serial# must be 9 chars in length (found: %d)\n", len);
+				return 1;
+			}
+			static char* enc32 = "0abcdefghjkmnpqrstuvwxyz12346789";
+			for(i=0; i<len; ++i) {
+				if(strchr(enc32, val[i]) == NULL) {
+					printf("serial# contains an invalid character: %c\n", val[i]);
+					return 1;
+				}
+			}
+		}
+	}
 
 	/*
 	 * search if variable with this name already exists
@@ -260,7 +392,7 @@ int _do_setenv (int flag, int argc, char *argv[])
 			udelay(50000);
 			for (;;) {
 				if (getc() == '\r')
-				      break;
+					break;
 			}
 		}
 
@@ -350,7 +482,12 @@ int _do_setenv (int flag, int argc, char *argv[])
 #ifdef CONFIG_NET_MULTI
 		eth_set_enetaddr(0, argv[2]);
 #endif
-		return 0;
+
+		return write_factory(imac, NULL);
+	}
+
+	if (strcmp(argv[1],"serial#") == 0) {
+		return write_factory(0, argv[2]);
 	}
 
 	if (strcmp(argv[1],"ipaddr") == 0) {
@@ -403,7 +540,7 @@ int _do_setenv (int flag, int argc, char *argv[])
 
 	printf("\n Default FLASH_CS1_CFG = %08X \n",regvalue);
 
-    regvalue &= ~(0x3 << 26);
+	regvalue &= ~(0x3 << 26);
 	regvalue |= (0x1 << 26);
 
 	regvalue |= (0x1 << 24);
