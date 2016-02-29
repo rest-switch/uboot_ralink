@@ -98,7 +98,7 @@ uchar default_environment[] = {
 	"eth3addr="	MK_STR(CONFIG_ETH3ADDR)		"\0"
 #endif
 #ifdef	CONFIG_IPADDR
-	"ipaddr=" MK_STR(CONFIG_IPADDR)		"\0"
+	"ipaddr=" MK_STR(CONFIG_IPADDR)			"\0"
 #endif
 #ifdef	CONFIG_SERVERIP
 	"serverip="	MK_STR(CONFIG_SERVERIP)		"\0"
@@ -132,6 +132,9 @@ uchar default_environment[] = {
 #endif
 #if defined(CONFIG_PCI_BOOTDELAY) && (CONFIG_PCI_BOOTDELAY > 0)
 	"pcidelay="	MK_STR(CONFIG_PCI_BOOTDELAY)	"\0"
+#endif
+#ifdef  CONFIG_EXTRA_ENV_SETTINGS
+	CONFIG_EXTRA_ENV_SETTINGS			"\0"
 #endif
 	"\0"
 };

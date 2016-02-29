@@ -41,7 +41,8 @@ extern unsigned int  CFG_BLOCKSIZE;
 #include "../../autoconf.h"
 //#define DEBUG				1
 //#define ET_DEBUG
-#define CONFIG_RT2880_ETH		1	/* Enable built-in 10/100 Ethernet */
+#define CONFIG_RT2880_ETH		1	/* enable built-in 10/100 Ethernet */
+#define CONFIG_CMD_HISTORY		1       /* enable command history */
 
 #define CONFIG_MIPS32			1	/* MIPS 4Kc CPU core	*/
 //CONFIG_INCA_IP
@@ -92,44 +93,26 @@ extern unsigned int  CFG_BLOCKSIZE;
 
 #define SERIAL_CLOCK_DIVISOR	16
 
-#define CONFIG_BOOTDELAY	1	/* autoboot after 1 second */
+#define CONFIG_BOOTDELAY		1	/* autoboot after 1 second */
 
-#define CONFIG_BAUDRATE		57600
+#define CONFIG_BAUDRATE			57600
 
-#define CONFIG_SERVERIP		192.168.1.100
-#define CONFIG_IPADDR		192.168.1.8
-#define CONFIG_ETHADDR		"00:AA:BB:CC:DD:10"
+#define CONFIG_SERVERIP			192.168.1.100
+#define CONFIG_IPADDR			192.168.1.8
+#define CONFIG_ETHADDR			"00:AA:BB:CC:DD:10"
 #define CONFIG_ENV_OVERWRITE	1
 
 /* valid baudrates */
-#define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
+#define CFG_BAUDRATE_TABLE		{ 9600, 19200, 38400, 57600, 115200 }
 
 #define	CONFIG_TIMESTAMP	/* print image info with timestamp */
 
 #undef	CONFIG_BOOTARGS
 
-#define CONFIG_EXTRA_ENV_SETTINGS					\
-	"ramargs=setenv bootargs root=/dev/ram rw\0"			\
-	"addip=setenv bootargs $(bootargs) "				\
-	"ip=$(ipaddr):$(serverip):$(gatewayip):$(netmask)"		\
-	":$(hostname):$(netdev):off\0"					\
-	"addmisc=setenv bootargs $(bootargs) "				\
-		"console=ttyS0,$(baudrate) "				\
-		"ethaddr=$(ethaddr) "					\
-		"panic=1\0"						\
-	"flash_self=run ramargs addip addmisc;"				\
-		"bootm $(kernel_addr) $(ramdisk_addr)\0"		\
-	"kernel_addr=BFC40000\0"					\
-	"u-boot=u-boot.bin\0"						\
-	"load=tftp 8A100000 $(u-boot)\0"				\
-	"u_b=protect off 1:0-1;era 1:0-1;"				\
-		"cp.b 8A100000 BC400000 $(filesize)\0"			\
-	"loadfs=tftp 8A100000 root.cramfs\0"				\
-	"u_fs=era bc540000 bc83ffff;"					\
-		"cp.b 8A100000 BC540000 $(filesize)\0"			\
-	"test_tftp=tftp 8A100000 root.cramfs;run test_tftp\0"		\
+#define CONFIG_EXTRA_ENV_SETTINGS								\
+	"bootfile=sysupgrade.bin\0"									\
 	"copyright=Copyright 2014-2016 The REST Switch Authors\0"	\
-	"website=www.rest-switch.com\0"					\
+	"website=www.rest-switch.com\0"								\
 	""
 
 #define CONFIG_BOOTCOMMAND	"tftp" //"run flash_self"
